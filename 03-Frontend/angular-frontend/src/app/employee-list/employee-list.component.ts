@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-employee-list',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent {
+
+  employees!: Employee[];
 
 }
