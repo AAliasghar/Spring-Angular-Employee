@@ -13,20 +13,20 @@ export class CreateEmployeeComponent implements OnInit {
 
   employee: Employee = new Employee();
 
-  constructor(private employeeService:EmployeeService, private router:Router) { }
+  constructor(private employeeService: EmployeeService, private router: Router) { }
   ngOnInit(): void {
 
   }
 
-  saveEmployee(){
-    this.employeeService.addEmployee(this.employee).subscribe( data => {
+  saveEmployee() {
+    this.employeeService.addEmployee(this.employee).subscribe(data => {
       console.log(data);
       this.goToEmployeeList();
     },
-      error =>console.log(error));
+      error => console.log(error));
   }
 
-  goToEmployeeList(){
+  goToEmployeeList() {
     this.router.navigate(['/employees']);
   }
 
