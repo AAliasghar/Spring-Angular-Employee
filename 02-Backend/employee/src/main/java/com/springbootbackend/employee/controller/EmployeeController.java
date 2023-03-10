@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springbootbackend.employee.exception.ResourceNotFoundException;
@@ -33,10 +34,10 @@ public class EmployeeController {
 
     // Get Employee By Id
     @GetMapping("/employees/{id}")
-    public ResponseEntity <Employee> getEmployeeById(@PathVariable Long id){
-        Employee employee= employeeRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id"+id));
-        return  new ResponseEntity<Employee>(employee, HttpStatus.OK);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
     }
 
     // Create/Save Employee
@@ -46,9 +47,20 @@ public class EmployeeController {
     }
 
     // Update Employee
-    // @PostMapping
-    // public 
+    @PostMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployeeById(@PathVariable Long id, @RequestBody Employee employeeDetails) {
 
-    // public Employee
+        // Getting Employee By Id
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+        // Updating new details        
+        employee.setFirstName(employeeDetails.getFirstName());
+        employee.setLastName(employeeDetails.getLastName());
+        employee.setEmailId(employeeDetails.getEmailId());
+
+        // save employee 
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return ResponseEntity.ok(updatedEmployee);
+    }
 
 }
