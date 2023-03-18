@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 })
 export class EmployeeListComponent implements OnInit {
 
-  employees: Employee[]=[];
+  employees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService, private router: Router) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getEmployees();
-   
+
   }
 
   //Get employee
@@ -28,14 +28,21 @@ export class EmployeeListComponent implements OnInit {
   }
 
   // Update employee navigate
-  updateEmployee(id: number){
-    this.router.navigate(['update-employee',id]);
+  updateEmployee(id: number) {
+    this.router.navigate(['update-employee', id]);
   }
 
- 
+  deleteEmployee(id: number) {
+    this.employeeService.deleteEmployeeByID(id).subscribe(Data => {
+      console.log(Data);
+      this.getEmployees();
+    })
+  }
 
-  
 
-  
+
+
+
+
 
 }
