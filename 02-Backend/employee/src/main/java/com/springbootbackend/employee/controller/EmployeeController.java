@@ -72,7 +72,7 @@ public class EmployeeController {
         // Getting Employee By Id
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
-        //
+        // Delete Employee
         employeeRepository.delete(employee);
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
