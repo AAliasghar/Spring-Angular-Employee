@@ -40,13 +40,12 @@ public class EmployeeController {
         return serviceEmployeeImpl.findAllEmployees();
     }
 
-    // Get Employee By Id
-    // @GetMapping("/employees/{id}")
-    // public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-    //     Employee employee = employeeRepository.findById(id)
-    //             .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
-    //     return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-    // }
+   // Get Employee By Id
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        Employee employee = serviceEmployeeImpl.getEmployeeById(id);    
+        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+    }
 
     // // Create/Save Employee
     // @PostMapping("/employees")
