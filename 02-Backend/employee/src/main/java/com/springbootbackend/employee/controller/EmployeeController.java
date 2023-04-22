@@ -47,11 +47,11 @@ public class EmployeeController {
         return new ResponseEntity<Employee>(employee, HttpStatus.OK);
     }
 
-    // Create/Save Employee
+    // Create Save Employee
     @PostMapping("/employees")
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
-        serviceEmployeeImpl.saveEmployeeDto(employeeDto);
-        return new ResponseEntity<>(employeeDto,HttpStatus.CREATED);
+        EmployeeDto savedEmployeeDto = serviceEmployeeImpl.saveEmployeeDto(employeeDto);
+        return new ResponseEntity<>(savedEmployeeDto,HttpStatus.CREATED);
     }
 
     // // Update Employee
