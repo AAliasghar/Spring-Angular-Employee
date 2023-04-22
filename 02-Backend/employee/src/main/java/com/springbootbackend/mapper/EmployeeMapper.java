@@ -5,7 +5,7 @@ import com.springbootbackend.employee.model.Employee;
 
 public class EmployeeMapper {
 
-    // // Convert JPA Entity to EmployeeDto
+    // Convert JPA Entity to EmployeeDto
     public static EmployeeDto employeeMapToEmployeeDto(Employee employee){
         EmployeeDto employeeDto = new EmployeeDto(
             employee.getId(),
@@ -16,7 +16,7 @@ public class EmployeeMapper {
         return employeeDto;
     }
     
-    // // Convert EmployeeDto to JPA Entity
+    // Convert EmployeeDto to JPA Entity
     public static Employee employeeDtoMapToEmployee(EmployeeDto employeeDto){
         Employee employee = new Employee(
           //  employeeDto.getId(),

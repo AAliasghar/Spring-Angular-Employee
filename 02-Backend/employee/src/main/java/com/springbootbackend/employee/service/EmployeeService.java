@@ -10,5 +10,7 @@ import com.springbootbackend.employee.model.Employee;
 public interface EmployeeService {
     List<Employee> findAllEmployees();
     Employee getEmployeeById(Long id);
+    EmployeeDto saveEmployeeDto(EmployeeDto employeeDto);
+
 
 }

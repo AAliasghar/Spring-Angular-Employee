@@ -10,6 +10,7 @@ import com.springbootbackend.employee.dto.EmployeeDto;
 import com.springbootbackend.employee.exception.ResourceNotFoundException;
 import com.springbootbackend.employee.model.Employee;
 import com.springbootbackend.employee.repository.EmployeeRepository;
+import com.springbootbackend.mapper.EmployeeMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 public class ServiceEmployeeImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
+    
 
     @Override
     public List<Employee> findAllEmployees() {
@@ -33,6 +35,16 @@ public class ServiceEmployeeImpl implements EmployeeService{
            
        return employee; 
         
+    }
+
+    @Override
+    public EmployeeDto saveEmployeeDto(EmployeeDto employeeDto) {
+        // Convert EmployeeDto to JPA Entity
+       Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
+       Employee savedEmployee = employeeRepository.save(employee);
+       // Convert JPA Entity to EmployeeDto
+       EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+       return savedEmployeeDto;
     }
 
  
