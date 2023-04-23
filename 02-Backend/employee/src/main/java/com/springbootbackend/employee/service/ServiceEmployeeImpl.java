@@ -1,8 +1,9 @@
 package com.springbootbackend.employee.service;
 
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,18 @@ public class ServiceEmployeeImpl implements EmployeeService{
         EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
         return savedEmployeeDto;
 
+    }
+
+    @Override
+    public Map<String, Boolean> deleteEmployeeById(Long id) {
+        // Getting Employee By Id
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+        // Delete Employee
+        employeeRepository.delete(employee);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 
  

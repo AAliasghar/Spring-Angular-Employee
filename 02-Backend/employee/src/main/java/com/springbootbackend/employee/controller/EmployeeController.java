@@ -63,18 +63,13 @@ public class EmployeeController {
     }
 
     // // Delete Employee By Id
-    // @DeleteMapping("/employees/{id}")
-    // public ResponseEntity<Map<String, Boolean>> deleteEmployeeById( @PathVariable Long id) {
-    //     // Getting Employee By Id
-    //     Employee employee = employeeRepository.findById(id)
-    //             .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
-    //     // Delete Employee
-    //     employeeRepository.delete(employee);
-    //     Map<String,Boolean> response = new HashMap<>();
-    //     response.put("deleted", Boolean.TRUE);
-    //     return ResponseEntity.ok(response);
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteEmployeeById( @PathVariable Long id) {
+       Map<String, Boolean> response = serviceEmployeeImpl.deleteEmployeeById(id);
+       
+        return  ResponseEntity.ok(response);
                
-    // };
+    };
 
     }
 
