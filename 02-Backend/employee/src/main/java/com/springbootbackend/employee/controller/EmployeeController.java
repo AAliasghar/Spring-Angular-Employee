@@ -50,26 +50,17 @@ public class EmployeeController {
     // Create Save Employee
     @PostMapping("/employees")
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
-        EmployeeDto savedEmployeeDto = serviceEmployeeImpl.saveEmployeeDto(employeeDto);
+        EmployeeDto savedEmployeeDto = serviceEmployeeImpl.saveEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployeeDto,HttpStatus.CREATED);
     }
 
-    // // Update Employee
-    // @PutMapping("/employees/{id}")
-    // public ResponseEntity<Employee> updateEmployeeById(@PathVariable Long id, @RequestBody Employee employeeDetails) {
-
-    //     // Getting Employee By Id
-    //     Employee employee = employeeRepository.findById(id)
-    //             .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
-    //     // Updating new details
-    //     employee.setFirstName(employeeDetails.getFirstName());
-    //     employee.setLastName(employeeDetails.getLastName());
-    //     employee.setEmailId(employeeDetails.getEmailId());
-
-    //     // save employee
-    //     Employee updatedEmployee = employeeRepository.save(employee);
-    //     return ResponseEntity.ok(updatedEmployee);
-    // }
+    // Update Employee
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<EmployeeDto> updateEmployeeById(@PathVariable Long id, @RequestBody EmployeeDto employeeDetails) {
+        EmployeeDto updatedEmployeeDto = serviceEmployeeImpl.updateEmployeeById(id,employeeDetails);
+        return new ResponseEntity<>(updatedEmployeeDto, HttpStatus.OK);
+       
+    }
 
     // // Delete Employee By Id
     // @DeleteMapping("/employees/{id}")
