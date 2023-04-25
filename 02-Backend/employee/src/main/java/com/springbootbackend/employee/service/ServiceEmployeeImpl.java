@@ -1,10 +1,10 @@
 package com.springbootbackend.employee.service;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.springbootbackend.employee.dto.EmployeeDto;
@@ -15,37 +15,39 @@ import com.springbootbackend.mapper.EmployeeMapper;
 
 import lombok.AllArgsConstructor;
 
-
 @Service
 @AllArgsConstructor
-public class ServiceEmployeeImpl implements EmployeeService{
+public class ServiceEmployeeImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
-    
+    private ModelMapper modelMapper;
 
     @Override
     public List<Employee> findAllEmployees() {
 
-         return  employeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     public Employee getEmployeeById(Long id) {
-       Employee employee = employeeRepository.findById(id)
-       .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id"+ id));
-           
-       return employee; 
-        
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+
+        return employee;
+
     }
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
         // Convert EmployeeDto to JPA Entity
-       Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
-       Employee savedEmployee = employeeRepository.save(employee);
-       // Convert JPA Entity to EmployeeDto
-       EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
-       return savedEmployeeDto;
+        //Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+
+        Employee savedEmployee = employeeRepository.save(employee);
+        // Convert JPA Entity to EmployeeDto
+        //EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+        EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
+        return savedEmployeeDto;
     }
 
     @Override
@@ -78,6 +80,4 @@ public class ServiceEmployeeImpl implements EmployeeService{
         return response;
     }
 
- 
-    
 }
