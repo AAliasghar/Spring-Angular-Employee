@@ -40,12 +40,13 @@ public class ServiceEmployeeImpl implements EmployeeService {
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
         // Convert EmployeeDto to JPA Entity
-        //Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
+        // Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
         Employee employee = modelMapper.map(employeeDto, Employee.class);
 
         Employee savedEmployee = employeeRepository.save(employee);
         // Convert JPA Entity to EmployeeDto
-        //EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+        // EmployeeDto savedEmployeeDto =
+        // EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
         EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
         return savedEmployeeDto;
     }
@@ -63,7 +64,8 @@ public class ServiceEmployeeImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         // Convert JPA Entity to EmployeeDto
-        EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+        // EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+        EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
         return savedEmployeeDto;
 
     }
