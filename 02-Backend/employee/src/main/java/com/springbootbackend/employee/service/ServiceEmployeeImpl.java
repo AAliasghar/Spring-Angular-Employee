@@ -11,6 +11,7 @@ import com.springbootbackend.employee.dto.EmployeeDto;
 import com.springbootbackend.employee.exception.ResourceNotFoundException;
 import com.springbootbackend.employee.model.Employee;
 import com.springbootbackend.employee.repository.EmployeeRepository;
+import com.springbootbackend.mapper.AutoEmployeeMapper;
 import com.springbootbackend.mapper.EmployeeMapper;
 
 import lombok.AllArgsConstructor;
@@ -41,13 +42,16 @@ public class ServiceEmployeeImpl implements EmployeeService {
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
         // Convert EmployeeDto to JPA Entity
         // Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
-        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        // Employee employee = modelMapper.map(employeeDto, Employee.class);
+        Employee employee = AutoEmployeeMapper.MAPPER.mapToEmployee(employeeDto);
 
         Employee savedEmployee = employeeRepository.save(employee);
         // Convert JPA Entity to EmployeeDto
         // EmployeeDto savedEmployeeDto =
         // EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
-        EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
+        // EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
+        EmployeeDto savedEmployeeDto = AutoEmployeeMapper.MAPPER.mapToEmployeeDto(savedEmployee);
+
         return savedEmployeeDto;
     }
 
@@ -64,7 +68,8 @@ public class ServiceEmployeeImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         // Convert JPA Entity to EmployeeDto
-        // EmployeeDto savedEmployeeDto = EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
+        // EmployeeDto savedEmployeeDto =
+        // EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
         EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
         return savedEmployeeDto;
 
