@@ -49,7 +49,8 @@ public class ServiceEmployeeImpl implements EmployeeService {
         // Convert JPA Entity to EmployeeDto
         // EmployeeDto savedEmployeeDto =
         // EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
-        // EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
+        // EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee,
+        // EmployeeDto.class);
         EmployeeDto savedEmployeeDto = AutoEmployeeMapper.MAPPER.mapToEmployeeDto(savedEmployee);
 
         return savedEmployeeDto;
@@ -70,7 +71,9 @@ public class ServiceEmployeeImpl implements EmployeeService {
         // Convert JPA Entity to EmployeeDto
         // EmployeeDto savedEmployeeDto =
         // EmployeeMapper.employeeMapToEmployeeDto(savedEmployee);
-        EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
+        // EmployeeDto savedEmployeeDto = modelMapper.map(savedEmployee,
+        // EmployeeDto.class);
+        EmployeeDto savedEmployeeDto = AutoEmployeeMapper.MAPPER.mapToEmployeeDto(savedEmployee);
         return savedEmployeeDto;
 
     }
