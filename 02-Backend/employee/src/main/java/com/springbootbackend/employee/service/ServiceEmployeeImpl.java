@@ -32,7 +32,7 @@ public class ServiceEmployeeImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(Long id) {
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
 
         return employee;
 
@@ -61,7 +61,7 @@ public class ServiceEmployeeImpl implements EmployeeService {
 
         // Getting Employee By Id
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
         employee.setEmailId(employeeDto.getEmailId());
@@ -82,7 +82,7 @@ public class ServiceEmployeeImpl implements EmployeeService {
     public Map<String, Boolean> deleteEmployeeById(Long id) {
         // Getting Employee By Id
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with this id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
         // Delete Employee
         employeeRepository.delete(employee);
         Map<String, Boolean> response = new HashMap<>();
