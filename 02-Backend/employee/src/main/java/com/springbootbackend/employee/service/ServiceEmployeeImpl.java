@@ -3,11 +3,13 @@ package com.springbootbackend.employee.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.springbootbackend.employee.dto.EmployeeDto;
+import com.springbootbackend.employee.exception.EmailAlreadyExistException;
 import com.springbootbackend.employee.exception.ResourceNotFoundException;
 import com.springbootbackend.employee.model.Employee;
 import com.springbootbackend.employee.repository.EmployeeRepository;
@@ -40,6 +42,14 @@ public class ServiceEmployeeImpl implements EmployeeService {
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
+
+        Optional<Employee> emOptional = employeeRepository.findByEmailId(employeeDto.getEmailId());
+
+        if (emOptional.isPresent()) {
+            throw new EmailAlreadyExistException("Email Already Exist for Employee");
+
+        }
+
         // Convert EmployeeDto to JPA Entity
         // Employee employee = EmployeeMapper.employeeDtoMapToEmployee(employeeDto);
         // Employee employee = modelMapper.map(employeeDto, Employee.class);
