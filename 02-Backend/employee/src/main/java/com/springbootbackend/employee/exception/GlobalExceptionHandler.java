@@ -34,4 +34,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_GATEWAY);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
+            WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                "INTERNAL_SERVER_ERROR",
+                webRequest.getDescription(false));
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
