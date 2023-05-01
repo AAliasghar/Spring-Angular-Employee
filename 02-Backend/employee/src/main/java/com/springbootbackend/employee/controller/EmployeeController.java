@@ -3,6 +3,8 @@ package com.springbootbackend.employee.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,7 +46,7 @@ public class EmployeeController {
 
     // Create Save Employee
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
+    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
         EmployeeDto savedEmployeeDto = serviceEmployeeImpl.saveEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployeeDto, HttpStatus.CREATED);
     }
@@ -52,7 +54,7 @@ public class EmployeeController {
     // Update Employee
     @PutMapping("/employees/{id}")
     public ResponseEntity<EmployeeDto> updateEmployeeById(@PathVariable Long id,
-            @RequestBody EmployeeDto employeeDetails) {
+            @RequestBody @Valid EmployeeDto employeeDetails) {
         EmployeeDto updatedEmployeeDto = serviceEmployeeImpl.updateEmployeeById(id, employeeDetails);
         return new ResponseEntity<>(updatedEmployeeDto, HttpStatus.OK);
 
