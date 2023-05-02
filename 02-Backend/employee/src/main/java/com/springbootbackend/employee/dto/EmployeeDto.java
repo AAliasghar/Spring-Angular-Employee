@@ -16,12 +16,12 @@ import lombok.Setter;
 public class EmployeeDto {
 
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Employee First Name should not be empty")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "Employee Last Name should not be empty")
     private String lastName;
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "Employee Email should not be empty")
+    @Email(message = "Email should be valid")
     private String emailId;
 
 }
